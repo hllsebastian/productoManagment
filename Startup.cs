@@ -32,6 +32,7 @@ namespace ApiProductManagment
             services.AddDbContext<ProductsManagmentContext>(optinons => optinons.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddScoped<IProduct, ProductRepository>();
             services.AddScoped<IBrand, BrandRepository>();
+            services.AddScoped<ICategory, CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

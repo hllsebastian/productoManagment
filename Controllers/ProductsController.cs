@@ -55,8 +55,7 @@ namespace ApiProductManagment.Controllers
                 ProductName    = p.Name,
                 Price          = p.Price,
                 ExpirationDate = p.Expiration,
-                Sku            = p.Sku,
-                
+                Sku            = p.Sku,                
             };
             _repository.CreateProduct(newp);
             return newp.editingAsDto();

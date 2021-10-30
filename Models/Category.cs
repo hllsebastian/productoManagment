@@ -10,7 +10,6 @@ namespace ApiProductManagment.Models
 {
     [Table("Category")]
     [Index(nameof(CategoryName), Name = "UQ__Category__8517B2E04074083C", IsUnique = true)]
-    [Index(nameof(Sku), Name = "UQ__Category__CA1FD3C58EF90CB4", IsUnique = true)]
     public partial class Category
     {
         [Key]

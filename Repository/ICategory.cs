@@ -7,8 +7,8 @@ namespace ApiProductManagment.Repository
     {
         void CreateCategory(Category c);
         void DeleteCategory(int id);
-        Category GetCategor(int id);
-        IEnumerable<Category> GetCategory();
+        Category GetCategory(int id);
+        IEnumerable<Category> GetCategories();
         void UpdateProduct(Category p);
 
 

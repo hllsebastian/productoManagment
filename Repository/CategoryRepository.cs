@@ -1,4 +1,5 @@
-﻿using ApiProductManagment.Models;
+﻿using ApiProductManagment.Dtos.CategoryDto;
+using ApiProductManagment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,29 +15,73 @@ namespace ApiProductManagment.Repository
             this._context = context;
         }
 
+        // Post
         public void CreateCategory(Category c)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Categories.Add(c);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error creating category" + ex.ToString());
+            }
         }
 
+        // Put
         public void DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var c = GetCategory(id);
+                if (c != null )
+                {
+                    _context.Categories.Remove(c);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Category GetCategor(int id)
+      
+
+        // Get{id}
+        public Category GetCategory(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var p = _context.Categories.Find(id);
+                return p;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error reading category" + ex.ToString());
+            }
         }
 
-        public IEnumerable<Category> GetCategory()
-        {
-            throw new NotImplementedException();
-        }
-
+   
+        // Put
         public void UpdateProduct(Category p)
         {
             throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<Category> GetCategories()
+        {
+            try
+            {
+                return _context.Categories.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error Reading categories" + ex.ToString());
+            }
         }
     }
 }

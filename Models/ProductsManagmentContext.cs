@@ -56,7 +56,6 @@ namespace ApiProductManagment.Models
 
                 entity.Property(e => e.Refrigerated).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.Sku).IsUnicode(false);
 
                 entity.HasOne(d => d.IdProductCtNavigation)
                     .WithMany(p => p.Categories)

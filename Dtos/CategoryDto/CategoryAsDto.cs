@@ -20,7 +20,7 @@ namespace ApiProductManagment.Dtos.CategoryDto
             };
         }
 
-        public static EditingCategoryDto editingCategoryDto(this Category c)
+        public static EditingCategoryDto editingCategoryDto(this Models.Category c)
         {
             return new EditingCategoryDto
             {
