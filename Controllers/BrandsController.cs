@@ -31,6 +31,15 @@ namespace ApiProductManagment.Controllers
             return brand;
         }
 
+
+        // GET: api/<BrandsController>
+        [HttpGet("test-route")]
+        public IEnumerable<ReadBrandDto> GetNew()
+        {
+            var brand = _repository.GetBrands().Select(p => p.brandtAsDto());
+            return brand;
+        }
+
         // GET api/<BrandsController>/5
         [HttpGet("{id}")]
         public ActionResult<ReadBrandDto> Get(int id)
