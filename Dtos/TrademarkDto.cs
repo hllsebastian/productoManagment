@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Dtos
 {
-    public class EditingBrandDto
+    public class TrademarkDto
     {
-        public string Brand { get; set; }
-        public string Country { get; set; }
+        public Guid IdTrademark { get; set; }
+        public string Mark { get; set; }
     }
 }
