@@ -199,6 +199,19 @@ namespace ApiProductManagment.ModelsUpdate
             });
 
             OnModelCreatingPartial(modelBuilder);
+
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<CategoriesXproduct>().Property(e => e.IdCategoryXproduct).HasConversion<string>();
+            modelBuilder.Entity<Category>().Property(e => e.IdCategory).HasConversion<string>();
+            modelBuilder.Entity<CupBoard>().Property(e => e.IdCupBoard).HasConversion<string>();
+            modelBuilder.Entity<CupBoardDetail>().Property(e => e.IdCupboardDeatail).HasConversion<string>();
+            modelBuilder.Entity<Product>().Property(e => e.IdProduct).HasConversion<string>();
+            modelBuilder.Entity<ShoppingList>().Property(e => e.IdShopping).HasConversion<string>();
+            modelBuilder.Entity<Trademark>().Property(e => e.IdTrademark).HasConversion<string>();
+            modelBuilder.Entity<User>().Property(e => e.IdUser).HasConversion<string>();
+            modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXcupboard).HasConversion<string>();
+            modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>()
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

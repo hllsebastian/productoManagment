@@ -1,5 +1,6 @@
-using ApiProductManagment.Models;
+using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository;
+using ApiProductManagment.Repository.ProductRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,10 +30,12 @@ namespace ApiProductManagment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProductsManagmentContext>(optinons => optinons.UseSqlServer(Configuration.GetConnectionString("connection")));
-            services.AddScoped<IProduct, ProductRepository>();
-            services.AddScoped<IBrand, BrandRepository>();
-            services.AddScoped<ICategory, CategoryRepository>();
+            services.AddDbContext<CupboardContext>(optinons => optinons.UseSqlServer(Configuration.GetConnectionString("connection")));
+            services.AddAutoMapper(typeof(Startup));
+            
+            services.AddScoped<IProductRepository, ProductRepository>();
+            //services.AddScoped<IBrand, BrandRepository>();
+            //services.AddScoped<ICategory, CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
