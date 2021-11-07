@@ -38,21 +38,24 @@ namespace ApiProductManagment.Controllers
 
 
         // GET api/<ProductsController>/5
-        //[HttpGet("{id}")]
-        //public string Get(Guid id)
-        //{
-        //    var p = _repository.GetProduct(id);
-        //    if (p is null)
-        //    {
-               
-        //    }
-        //    return _mapper.Map(p);
-        //}
+        [HttpGet("{id}")]
+        public ActionResult<ProductDto> Get(Guid id)
+        {
+            var p = _repository.GetProduct(id);
+            if (p is null)
+            {
+                return NotFound();
+            }
+            return _mapper.Map<ProductDto>(p);
+        }
 
         // POST api/<ProductsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<ProductDto> Post(ProductDto p)
         {
+            var product = _mapper.Map<Product>(p);
+            _repository.CreateProduct(product);
+            return Ok();
         }
 
         // PUT api/<ProductsController>/5
@@ -63,8 +66,15 @@ namespace ApiProductManagment.Controllers
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<ProductDto> Delete(Guid id)
         {
+            Product p = _repository.GetProduct(id);
+            if (p is null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteProduct(id);
+            return NoContent();
         }
     }
 }

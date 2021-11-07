@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Profiles
 {
-    public class ProductProfile : Profile 
+    public class CategoryProfile : Profile
     {
-        public ProductProfile()
+        public CategoryProfile()
         {
-            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }

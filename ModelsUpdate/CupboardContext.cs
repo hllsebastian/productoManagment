@@ -211,7 +211,7 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<Trademark>().Property(e => e.IdTrademark).HasConversion<string>();
             modelBuilder.Entity<User>().Property(e => e.IdUser).HasConversion<string>();
             modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXcupboard).HasConversion<string>();
-            modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>()
+            modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>();
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

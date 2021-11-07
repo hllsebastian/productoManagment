@@ -7,11 +7,7 @@ namespace ApiProductManagment.Dtos
 {
     public class ProductDto
     {
-        public Guid IdProduct { get; set; }
-
-        public Guid IdMark { get; set; }
-
-        public string Product { get; set; }
+        public string NameProduct { get; set; }
 
         public DateTime? ExpirationDate { get; set; }
 

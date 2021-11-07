@@ -7,7 +7,7 @@ namespace ApiProductManagment.Dtos
 {
     public class CategoryDto
     {
-        public Guid IdCategory { get; set; }
-        public string Category1 { get; set; }
+        public Guid Id { get; set; }
+        public string Category { get; set; }
     }
 }

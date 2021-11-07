@@ -1,5 +1,6 @@
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository;
+using ApiProductManagment.Repository.CategoryRepository;
 using ApiProductManagment.Repository.ProductRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,8 +35,8 @@ namespace ApiProductManagment
             services.AddAutoMapper(typeof(Startup));
             
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<Icategory, CategoryRepository>();
             //services.AddScoped<IBrand, BrandRepository>();
-            //services.AddScoped<ICategory, CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
