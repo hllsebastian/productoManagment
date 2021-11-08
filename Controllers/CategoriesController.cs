@@ -55,13 +55,17 @@ namespace ApiProductManagment.Controllers
             var category = _mapper.Map<Category>(c);
             _repository.CreateCategory(category);
             return Ok();
-
         }
 
         // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<CategoryDto>Put(CategoryDto c, Guid id)
         {
+            var result = _repository.GetCategory(id);
+            if (result is null) return NotFound();
+            var newproduct = _mapper.Map<Category>(c);
+            _repository.UpdateCategory(newproduct);
+            return Ok();
         }
 
         // DELETE api/<CategoriesController>/5

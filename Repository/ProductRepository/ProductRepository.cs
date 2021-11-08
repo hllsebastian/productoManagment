@@ -89,14 +89,15 @@ namespace ApiProductManagment.Repository.ProductRepository
         {
             try
             {
-                var list = _context.Products.ToList();
-                var index = list.FindIndex(existingProduct => existingProduct.IdProduct == p.IdProduct);
-                list[index] = p;
+                _context.Products.Update(p);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
+
                 throw new Exception("Error updating Product" + ex.ToString());
             }
+            
         }
 
 

@@ -85,10 +85,12 @@ namespace ApiProductManagment.Repository.CategoryRepository
         {
             try
             {
-              
+                _context.Categories.Update(c);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
+
                 throw new Exception("Error updating Category" + ex.ToString());
             }
         }
