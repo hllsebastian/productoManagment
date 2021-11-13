@@ -19,9 +19,8 @@ namespace ApiProductManagment.ModelsUpdate
         [Column("idCategory")]
         [StringLength(50)]
         public Guid IdCategory { get; set; }
-        [Column("category")]
         [StringLength(100)]
-        public string Category1 { get; set; }
+        public string Name { get; set; }
 
         [InverseProperty(nameof(CategoriesXproduct.IdCategoryNavigation))]
         public virtual ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }

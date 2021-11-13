@@ -32,6 +32,7 @@ namespace ApiProductManagment.Controllers
         [HttpGet]
         public IEnumerable<CategoryDto> Get()
         {
+   
             var categories = _repository.Getcategories();
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }

@@ -1,7 +1,10 @@
+using ApiProductManagment.Extention;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository;
 using ApiProductManagment.Repository.CategoryRepository;
+using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Repository.ProductRepository;
+using ApiProductManagment.Repository.RepositoryBase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,9 +36,12 @@ namespace ApiProductManagment
         {
             services.AddDbContext<CupboardContext>(optinons => optinons.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddAutoMapper(typeof(Startup));
-            
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<Icategory, CategoryRepository>();
+
+
+            // services.AddScoped<Icategory, CategoryRepository>();
+
+            services.AddServices();
+
             //services.AddScoped<IBrand, BrandRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

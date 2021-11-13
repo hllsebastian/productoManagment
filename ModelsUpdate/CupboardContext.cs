@@ -67,7 +67,7 @@ namespace ApiProductManagment.ModelsUpdate
             {
                 entity.Property(e => e.IdCategory).IsUnicode(false);
 
-                entity.Property(e => e.Category1).IsUnicode(false);
+                entity.Property(e => e.Name).IsUnicode(false);
             });
 
             modelBuilder.Entity<CupBoard>(entity =>
