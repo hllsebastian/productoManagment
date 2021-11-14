@@ -22,6 +22,10 @@ namespace ApiProductManagment.Mapping
             CreateMap<Trademark, TrademarkDto>().ReverseMap();
             CreateMap<Trademark, EditingTrademarkDto>().ReverseMap();
 
+            CreateMap<ShoppingList, ShoppingListDto>().ReverseMap();
+            CreateMap<ShoppingList, EditingShoppingListDto>().ReverseMap();
+
+
 
         }
     }

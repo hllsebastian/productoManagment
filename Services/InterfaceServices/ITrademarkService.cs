@@ -9,10 +9,10 @@ namespace ApiProductManagment.Services.InterfaceServices
 {
     public interface ITrademarkService
     {
-        Task<IEnumerable<TrademarkDto>> GetTrademarks();
+        IEnumerable<TrademarkDto> GetTrademarks();
         TrademarkDto GetTrademark(Guid id);
-        Task<TrademarkDto> CreateTrademark(EditingTrademarkDto Trademark);
-        Task<TrademarkDto> UploadTrademark(EditingTrademarkDto Trademark);
+        Task<TrademarkDto> CreateTrademark(EditingTrademarkDto trademark);
+        Task<EditingTrademarkDto> UploadTrademark(Guid id, EditingTrademarkDto trademark);
         Task<TrademarkDto> DeleteTrademark(Guid id);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
-using ApiProductManagment.Repository.CategoryRepository;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +31,9 @@ namespace ApiProductManagment.Controllers
 
         // GET: api/<CategoriesController>
         [HttpGet]
-        public ActionResult<CategoryDto> Get()
+        public IActionResult Get()
         {
-            var categories = _categoryService.GetCategories();
+            var categories =  _categoryService.GetCategories();
             return Ok(categories);
         }
 
@@ -43,37 +42,32 @@ namespace ApiProductManagment.Controllers
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
             return _categoryService.GetCategory(id);
-            //var idcategory = _categoryService.GetCategory(id);
+            //var idcategory = _categoryService.GetC<ategory(id);
             //return idcategory;
         }
 
         // POST api/<CategoriesController>
         [HttpPost]
-        public ActionResult<CategoryDto> Post(EditingCategoryDto c)
+        public async Task<IActionResult> Post(EditingCategoryDto category)
         {
-            var category = _categoryService.CreateCategory(c);
-            return Ok(category);
+            var resultcategory = await _categoryService.CreateCategory(category);
+            return Ok(resultcategory);
         }
 
         // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public ActionResult<CategoryDto> Put(Guid id, EditingCategoryDto c)
+        public async Task<IActionResult> Put(Guid id, EditingCategoryDto category)
         {
-            var idcategory = GetCategory(id);
-            if (idcategory == null)
-            {
-                throw new Exception("Error editing Category");
-            }
-            var category = _categoryService.UploadCategory(c);
-            return Ok(category);
+            var categoryresult = await _categoryService.UploadCategory(id, category);
+            return Ok(categoryresult);
         }
 
         // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _categoryService.DeleteCategory(id);
-            return NoContent();
+            var response = await _categoryService.DeleteCategory(id);
+            return Ok(response);
         }
     }
 }

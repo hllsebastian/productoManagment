@@ -24,7 +24,7 @@ namespace ApiProductManagment.Services
         }
 
 
-        public async Task<IEnumerable<CategoryDto>> GetCategories()
+        public IEnumerable<CategoryDto> GetCategories()
         {
             var categories = _repository.Queries();
             var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
@@ -49,27 +49,36 @@ namespace ApiProductManagment.Services
             return response; 
         }
 
-        public async Task<CategoryDto> UploadCategory(EditingCategoryDto category)
+        public async Task<EditingCategoryDto> UploadCategory(Guid id, EditingCategoryDto category)
         {
-            //var idcategory = _repository.QueryById(c => c.IdCategory == id);
-            //if (idcategory == null)
-            //{
-            //    throw new Exception("Error editing Category");
-            //}
-            var upCategory = _mapper.Map<Category>(category);
-            await _repository.Upload(upCategory);
-            var response = _mapper.Map<CategoryDto>(upCategory);
-            return response;
+            var categoryDb = _repository.QueryById(c => c.IdCategory == id);
+            if (categoryDb != null)
+            {
+                categoryDb.Name = category.Name;
+                // var upCategory = _mapper.Map<Category>(category);
+                await _repository.Upload(categoryDb);
+                var response = _mapper.Map<EditingCategoryDto>(categoryDb);
+                return response;
+            }
+            else
+            {
+            throw new Exception("Error editing Category");
+            }
         }
 
-        public Task<ProductDto> DeleteCategory(Guid id)
+        public async Task<CategoryDto> DeleteCategory(Guid id)
         {
-            var idcategory = _repository.QueryById(c => c.IdCategory == id);
-            if (idcategory != null)
+            var categoryDb = _repository.QueryById(c => c.IdCategory == id);
+            if (categoryDb != null)
             {
-                _repository.Delete(idcategory);
+                await _repository.Delete(categoryDb);
+                var response = _mapper.Map<CategoryDto>(categoryDb);
+                return response;
             }
-            throw new Exception("Error editing Category");
+            else
+            {
+            throw new Exception("Error deleting Category");
+            }
         }
     }
 }

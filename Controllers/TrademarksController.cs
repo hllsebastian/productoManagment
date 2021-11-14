@@ -29,7 +29,7 @@ namespace ApiProductManagment.Controllers
 
         // GET: api/<TrademarksController>
         [HttpGet]
-        public ActionResult<TrademarkDto> Get()
+        public IActionResult Get()
         {
             var trademarks = _trademarkService.GetTrademarks();
             return Ok(trademarks);
@@ -46,31 +46,26 @@ namespace ApiProductManagment.Controllers
 
         // POST api/<TrademarksController>
         [HttpPost]
-        public ActionResult<CategoryDto> Post(EditingTrademarkDto t)
+        public async Task<IActionResult> Post(EditingTrademarkDto trademark)
         {
-            var newtrademark = _trademarkService.CreateTrademark(t);
-            return Ok(newtrademark);
+            var resultrademark = await _trademarkService.CreateTrademark(trademark);
+            return Ok(resultrademark);
         }
 
         // PUT api/<TrademarksController>/5
         [HttpPut("{id}")]
-        public ActionResult<TrademarkDto>Put(Guid id, EditingTrademarkDto t)
+        public async Task<IActionResult> Put(Guid id, EditingTrademarkDto trademark)
         {
-            var idtrademark = GetCategory(id);
-            if (idtrademark == null)
-            {
-                var trademark = _trademarkService.UploadTrademark(t);
-                return Ok(trademark);
-            }
-            throw new Exception("Error editing Category");
+            var trademarkresult = await _trademarkService.UploadTrademark(id, trademark);
+            return Ok(trademarkresult);
         }
 
         // DELETE api/<TrademarksController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _trademarkService.DeleteTrademark(id);
-            return NoContent();
+            var response = await _trademarkService.DeleteTrademark(id);
+            return Ok(response);
         }
     }
 }

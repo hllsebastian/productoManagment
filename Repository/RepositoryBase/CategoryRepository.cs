@@ -10,14 +10,8 @@ namespace ApiProductManagment.Repository.RepositoryBase
 {
     public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository 
     {
-        private readonly IMapper _mapper;
-        public CupboardContext CupboardContext { get; set; }
-
-        public CategoryRepository(CupboardContext context, IMapper mapper) : base(context)
+        public CategoryRepository(CupboardContext context) : base(context)
         {
-            CupboardContext = context;
-            _mapper = mapper;
         }
-
     }
 }

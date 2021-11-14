@@ -23,7 +23,7 @@ namespace ApiProductManagment.Services
         }
 
 
-        public async Task<IEnumerable<TrademarkDto>> GetTrademarks()
+        public IEnumerable<TrademarkDto> GetTrademarks()
         {
             var trademarks = _repository.Queries();
             var trademarksDto = _mapper.Map<IEnumerable<TrademarkDto>>(trademarks);
@@ -33,12 +33,12 @@ namespace ApiProductManagment.Services
 
         public TrademarkDto GetTrademark(Guid id)
         {
-            var trademark = _repository.QueryById(c => c.IdTrademark == id);
-            if (trademark != null)
+            var trademarkdb = _repository.QueryById(c => c.IdTrademark == id);
+            if (trademarkdb != null)
             {
-                return _mapper.Map<TrademarkDto>(trademark);
+                return _mapper.Map<TrademarkDto>(trademarkdb);
             }
-            throw new Exception("Error reading Category");
+            throw new Exception("Error reading Trademark");
         }
 
 
@@ -51,30 +51,37 @@ namespace ApiProductManagment.Services
         }
 
 
-        public async Task<TrademarkDto> UploadTrademark(EditingTrademarkDto Trademark)
+        public async Task<EditingTrademarkDto> UploadTrademark(Guid id, EditingTrademarkDto trademark)
         {
-
-            if (Trademark == null)
+            var trademarkdb = _repository.QueryById(t => t.IdTrademark == id);
+            if (trademarkdb != null)
             {
-                var uptrademark = _mapper.Map<Trademark>(Trademark);
-                await _repository.Upload(uptrademark);
-                var response = _mapper.Map<TrademarkDto>(uptrademark);
+                trademarkdb.Mark = trademark.Mark;
+                // var uptrademark = _mapper.Map<Trademark>(trademark);
+                await _repository.Upload(trademarkdb);
+                var response = _mapper.Map<EditingTrademarkDto>(trademarkdb);
                 return response;
             }
-            throw new Exception("Error editing Category");
+            else
+            {
+                throw new Exception("Error editing Trademark");
+            }
         }
 
 
-        public Task<TrademarkDto> DeleteTrademark(Guid id)
+        public async Task<TrademarkDto> DeleteTrademark(Guid id)
         {
-            var idTrademark = _repository.QueryById(c => c.IdTrademark == id);
-            if (idTrademark != null)
+            var trademarkDb = _repository.QueryById(t => t.IdTrademark == id);
+            if (trademarkDb != null)
             {
-                _repository.Delete(idTrademark);
+               await _repository.Delete(trademarkDb);
+                var response = _mapper.Map<TrademarkDto>(trademarkDb);
+                return response;
             }
-            throw new Exception("Error editing Category");
-
-
+            else
+            {
+                throw new Exception("Error deleting Trademark");
+            }
         }
     }
 }

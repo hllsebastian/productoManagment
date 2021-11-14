@@ -9,10 +9,10 @@ namespace ApiProductManagment.Services.InterfaceServices
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDto>> GetCategories();
+        IEnumerable<CategoryDto> GetCategories();
         CategoryDto GetCategory(Guid id);
         Task<CategoryDto> CreateCategory(EditingCategoryDto category);
-        Task<CategoryDto> UploadCategory(EditingCategoryDto category);
-        Task<ProductDto> DeleteCategory(Guid id);
+        Task<EditingCategoryDto> UploadCategory(Guid id, EditingCategoryDto category);
+        Task<CategoryDto> DeleteCategory(Guid id);
     }
 }

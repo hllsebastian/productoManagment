@@ -1,7 +1,6 @@
 using ApiProductManagment.Extention;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository;
-using ApiProductManagment.Repository.CategoryRepository;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Repository.ProductRepository;
 using ApiProductManagment.Repository.RepositoryBase;
@@ -36,15 +35,13 @@ namespace ApiProductManagment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<CupboardContext>(optinons => optinons.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddAutoMapper(typeof(Startup));
 
-
-            // services.AddScoped<Icategory, CategoryRepository>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICategoryService, CategoryService>();
-
+            services.AgregarOpsiones(Configuration);
             services.AddServices();
+
 
             //services.AddScoped<IBrand, BrandRepository>();
             services.AddControllers();
