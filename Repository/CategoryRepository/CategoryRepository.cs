@@ -1,4 +1,5 @@
 ﻿using ApiProductManagment.ModelsUpdate;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,14 +82,17 @@ namespace ApiProductManagment.Repository.CategoryRepository
 
 
         // Put
-        public void UpdateCategory(Category c)
+        public async Task<ActionResult<Category>> UpdateCategory(Category c)
         {
             try
             {
-              
+                _context.Categories.Update(c);
+                _context.SaveChanges();
+                return c;
             }
             catch (Exception ex)
             {
+
                 throw new Exception("Error updating Category" + ex.ToString());
             }
         }

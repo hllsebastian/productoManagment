@@ -1,6 +1,8 @@
 ﻿using ApiProductManagment.ModelsUpdate;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiProductManagment.Repository.CategoryRepository
 {
@@ -10,7 +12,7 @@ namespace ApiProductManagment.Repository.CategoryRepository
         void DeleteCategory(Guid id);
         Category GetCategory(Guid id);
         IEnumerable<Category> Getcategories();
-        public void UpdateCategory(Category c);
+        Task <ActionResult<Category>> UpdateCategory(Category c);
 
     }
 }

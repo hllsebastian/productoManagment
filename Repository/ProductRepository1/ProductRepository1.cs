@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Repository.ProductRepository
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository1 : IProductRepository
     {
         private readonly CupboardContext _context;
 
-        public ProductRepository(CupboardContext context)
+        public ProductRepository1(CupboardContext context)
         {
             this._context = context;
         }
@@ -89,14 +89,14 @@ namespace ApiProductManagment.Repository.ProductRepository
         {
             try
             {
-                var list = _context.Products.ToList();
-                var index = list.FindIndex(existingProduct => existingProduct.IdProduct == p.IdProduct);
-                list[index] = p;
+                _context.Products.Update(p);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw new Exception("Error updating Product" + ex.ToString());
             }
+            
         }
 
 
