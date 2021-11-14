@@ -1,5 +1,6 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
+using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
@@ -22,39 +23,61 @@ namespace ApiProductManagment.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProducts()
+        public IEnumerable<ProductDto> GetProducts()
         {
-            var products =  _repository.Queries();
-            var productsDto = _mapper.Map<IEnumerable<ProductDto>> (products);
+            var productsDb =  _repository.Queries();
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>> (productsDb);
             return productsDto;
         }
 
-
-
-
-
-
-
-        public Task<EditingProductDto> CreateProduct(EditingProductDto cliente)
+        public ProductDto GetProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var productDb = _repository.QueryById(p => p.IdProduct == id);
+            if (productDb != null)
+            {
+                return _mapper.Map<ProductDto>(productDb);
+            }
+            throw new Exception("Error reading Product");
         }
 
-        public Task<ProductDto> DeleteProduct(int id)
+        public async Task<ProductDto> CreateProduct(EditingProductDto product)
         {
-            throw new NotImplementedException();
+            var productDb = _mapper.Map<Product>(product);
+            await _repository.Create(productDb);
+            var response = _mapper.Map<ProductDto>(productDb);
+            return response;
         }
 
-        public ProductDto GetProduct(int id)
+        public async Task<EditingProductDto> UploadProduct(Guid id, EditingProductDto product)
         {
-            throw new NotImplementedException();
+            var productDb = _repository.QueryById(p => p.IdProduct == id);
+            if (productDb != null)
+            {
+                productDb.NameProduct = product.Name;
+                // var upCategory = _mapper.Map<Category>(category);
+                await _repository.Upload(productDb);
+                var response = _mapper.Map<EditingProductDto>(productDb);
+                return response;
+            }
+            else
+            {
+                throw new Exception("Error editing Product");
+            }
         }
 
-        
-
-        public Task<EditingProductDto> UploadProduct(int id, EditingProductDto cliente)
+        public async Task<ProductDto> DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var productDb = _repository.QueryById(p => p.IdProduct == id);
+            if (productDb != null)
+            {
+                await _repository.Delete(productDb);
+                var response = _mapper.Map<ProductDto>(productDb);
+                return response;
+            }
+            else
+            {
+                throw new Exception("Error deleting Category");
+            }
         }
     }
 }

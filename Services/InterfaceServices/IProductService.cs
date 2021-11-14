@@ -9,10 +9,10 @@ namespace ApiProductManagment.Services.InterfaceServices
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetProducts();
-        ProductDto GetProduct(int id);
-        Task<EditingProductDto> CreateProduct(EditingProductDto cliente);
-        Task<EditingProductDto> UploadProduct(int id, EditingProductDto cliente);
-        Task<ProductDto> DeleteProduct(int id);
+        IEnumerable<ProductDto> GetProducts();
+        ProductDto GetProduct(Guid id);
+        Task<ProductDto> CreateProduct(EditingProductDto product);
+        Task<EditingProductDto> UploadProduct(Guid id, EditingProductDto product);
+        Task<ProductDto> DeleteProduct(Guid id);
     }
 }

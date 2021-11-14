@@ -29,7 +29,7 @@ namespace ApiProductManagment.Controllers
 
         // GET: api/<ShoppingListsController>
         [HttpGet]
-        public ActionResult<ShoppingListDto> Get()
+        public IActionResult Get()
         {
             var shoppingLists = _shoppingkService.GetShoppingLists();
             return Ok(shoppingLists);
@@ -47,31 +47,26 @@ namespace ApiProductManagment.Controllers
 
         // POST api/<ShoppingListsController>
         [HttpPost]
-        public ActionResult<ShoppingListDto> Post(EditingShoppingListDto s)
+        public async Task<IActionResult> Post(EditingShoppingListDto shoppingList)
         {
-            var newshoppingList = _shoppingkService.CreateShoppingList(s);
-            return Ok(newshoppingList);
+            var shoppingListresult = await _shoppingkService.CreateShoppingList(shoppingList);
+            return Ok(shoppingListresult);
         }
 
         // PUT api/<ShoppingListsController>/5
         [HttpPut("{id}")]
-        public ActionResult<ShoppingListDto> Put(Guid id, EditingShoppingListDto s)
+        public async Task<IActionResult> Put(Guid id, EditingShoppingListDto shoppingList)
         {
-            var idshoppingList = GetShoppinsList(id);
-            if (idshoppingList != null)
-            {
-                var shoppingList = _shoppingkService.UploadShoppingList(s);
-                return Ok(shoppingList);
-            }
-            throw new Exception("Error editing Category");
+            var shoppingListresult = await _shoppingkService.UploadShoppingList(id, shoppingList);
+            return Ok(shoppingList); ;
         }
 
         // DELETE api/<ShoppingListsController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _shoppingkService.DeleteShoppingList(id);
-            return NoContent();
+            var response = await _shoppingkService.DeleteShoppingList(id);
+            return Ok(response);
         }
     }
 }
