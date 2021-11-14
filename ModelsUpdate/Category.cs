@@ -8,13 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    public partial class Category
+    public class Category
     {
-        public Category()
-        {
-            CategoriesXproducts = new HashSet<CategoriesXproduct>();
-        }
-
         [Key]
         [Column("idCategory")]
         [StringLength(50)]
@@ -22,7 +17,6 @@ namespace ApiProductManagment.ModelsUpdate
         [StringLength(100)]
         public string Name { get; set; }
 
-        [InverseProperty(nameof(CategoriesXproduct.IdCategoryNavigation))]
-        public virtual ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }
+        public ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }
     }
 }

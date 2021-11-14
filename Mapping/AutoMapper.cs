@@ -15,8 +15,17 @@ namespace ApiProductManagment.Mapping
         public AutoMapper()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, EditingCategoryDto>().ReverseMap();
+            
+            CreateMap<Trademark, TrademarkDto>().ReverseMap();
+            CreateMap<Trademark, EditingTrademarkDto>().ReverseMap();
+
+            CreateMap<ShoppingList, ShoppingListDto>().ReverseMap();
+            CreateMap<ShoppingList, EditingShoppingListDto>().ReverseMap();
+
+
 
         }
     }
