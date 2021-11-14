@@ -9,10 +9,10 @@ namespace ApiProductManagment.Services.InterfaceServices
 {
     public interface IShoppingListService
     {
-        Task<IEnumerable<ShoppingListDto>> GetShoppingLists();
+        IEnumerable<ShoppingListDto> GetShoppingLists();
         ShoppingListDto GetShoppingList(Guid id);
         Task<ShoppingListDto> CreateShoppingList(EditingShoppingListDto shoppingList);
-        Task<ShoppingListDto> UploadShoppingList(EditingShoppingListDto shoppingList);
+        Task<EditingShoppingListDto> UploadShoppingList(Guid id, EditingShoppingListDto shoppingList);
         Task<ShoppingListDto> DeleteShoppingList(Guid id);
     }
 }

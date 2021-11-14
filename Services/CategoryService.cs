@@ -26,26 +26,26 @@ namespace ApiProductManagment.Services
 
         public IEnumerable<CategoryDto> GetCategories()
         {
-            var categories = _repository.Queries();
-            var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            var categoriesDb = _repository.Queries();
+            var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categoriesDb);
             return categoriesDto;
         }
 
         public CategoryDto GetCategory(Guid id)
         {
-            var category = _repository.QueryById(c => c.IdCategory == id);
-            if (category != null)
+            var categoryDb = _repository.QueryById(c => c.IdCategory == id);
+            if (categoryDb != null)
             {
-                return _mapper.Map<CategoryDto>(category);
+                return _mapper.Map<CategoryDto>(categoryDb);
             }
             throw new Exception("Error reading Category");
         }
 
         public async Task<CategoryDto> CreateCategory(EditingCategoryDto category)
         {
-            var newcategory = _mapper.Map<Category>(category);
-            await _repository.Create(newcategory);
-            var response = _mapper.Map<CategoryDto>(newcategory);
+            var categoryDb = _mapper.Map<Category>(category);
+            await _repository.Create(categoryDb);
+            var response = _mapper.Map<CategoryDto>(categoryDb);
             return response; 
         }
 

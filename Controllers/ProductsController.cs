@@ -1,4 +1,5 @@
 ﻿using ApiProductManagment.Dtos;
+using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.ProductRepository;
 using ApiProductManagment.Services.InterfaceServices;
@@ -29,7 +30,7 @@ namespace ApiProductManagment.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public ActionResult<ProductDto>Get()
+        public IActionResult Get()
         {
             var products = _productService.GetProducts();
             return Ok(products);
@@ -37,49 +38,35 @@ namespace ApiProductManagment.Controllers
 
 
 
-    //    // GET api/<ProductsController>/5
-    //    [HttpGet("{id}")]
-    //    public ActionResult<ProductDto> Get(Guid id)
-    //    {
-    //        var p = _repository.GetProduct(id);
-    //        if (p is null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        return _mapper.Map<ProductDto>(p);
-    //    }
+        // GET api/<ProductsController>/5
+        [HttpGet("{id}")]
+        public ActionResult<ProductDto> GetProduct(Guid id)
+        {
+            return _productService.GetProduct(id);
+        }
 
-    //    // POST api/<ProductsController>
-    //    [HttpPost]
-    //    public ActionResult<ProductDto> Post(ProductDto p)
-    //    {
-    //        var product = _mapper.Map<Product>(p);
-    //        _repository.CreateProduct(product);
-    //        return Ok();
-    //    }
+        // POST api/<ProductsController>
+        [HttpPost]
+        public async Task<IActionResult> Post(EditingProductDto product)
+        {
+            var resultproduct = await _productService.CreateProduct(product);
+            return Ok(resultproduct);
+        }
 
-    //    // PUT api/<ProductsController>/5
-    //    [HttpPut("{id}")]
-    //    public ActionResult<ProductDto> Put(ProductDto product, Guid id)
-    //    {
-    //        var result = _repository.GetProduct(id);
-    //        if (result is null) return NotFound();
-    //        var newproduct = _mapper.Map<Product>(product);
-    //        _repository.UpdateProduct(newproduct);
-    //        return Ok();
-    //    }
+        // PUT api/<ProductsController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, EditingProductDto product)
+        {
+            var productresult = await _productService.UploadProduct(id, product);
+            return Ok(productresult);
+        }
 
-    //    // DELETE api/<ProductsController>/5
-    //    [HttpDelete("{id}")]
-    //    public ActionResult<ProductDto> Delete(Guid id)
-    //    {
-    //        Product p = _repository.GetProduct(id);
-    //        if (p is null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        _repository.DeleteProduct(id);
-    //        return NoContent();
-    //    }
+        // DELETE api/<ProductsController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var response = await _productService.DeleteProduct(id);
+            return Ok(response);
+        }
     }
 }
