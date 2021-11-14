@@ -27,7 +27,6 @@ namespace ApiProductManagment.Services
             var products =  _repository.Queries();
             var productsDto = _mapper.Map<IEnumerable<ProductDto>> (products);
             return productsDto;
-
         }
 
 

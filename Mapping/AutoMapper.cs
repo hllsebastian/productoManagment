@@ -1,5 +1,6 @@
 ﻿
 using ApiProductManagment.Dtos;
+using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
 using AutoMapper;
 using System;
@@ -14,6 +15,9 @@ namespace ApiProductManagment.Mapping
         public AutoMapper()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, EditingCategoryDto>().ReverseMap();
+
         }
     }
 }

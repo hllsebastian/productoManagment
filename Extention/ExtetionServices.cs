@@ -17,6 +17,9 @@ namespace ApiProductManagment.Extention
             services.AddScoped(typeof(IRepositoryBase<Product>), typeof(RepositoryBase<Product>));
             services.AddTransient<IProductRepository, ProductRepository>();
 
+            services.AddScoped(typeof(IRepositoryBase<Category>), typeof(RepositoryBase<Category>));
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+
             return services;
         }
 

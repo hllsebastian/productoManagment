@@ -5,6 +5,8 @@ using ApiProductManagment.Repository.CategoryRepository;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Repository.ProductRepository;
 using ApiProductManagment.Repository.RepositoryBase;
+using ApiProductManagment.Services;
+using ApiProductManagment.Services.InterfaceServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +41,8 @@ namespace ApiProductManagment
 
 
             // services.AddScoped<Icategory, CategoryRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddServices();
 
