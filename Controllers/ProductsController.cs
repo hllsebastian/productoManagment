@@ -1,6 +1,8 @@
 ﻿using ApiProductManagment.Dtos;
-using ApiProductManagment.Models;
-using ApiProductManagment.Repository;
+using ApiProductManagment.ModelsUpdate;
+using ApiProductManagment.Repository.ProductRepository;
+using ApiProductManagment.Services.InterfaceServices;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,76 +13,73 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Controllers
 {
-    [Route("products")]
+    [Route("Products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
 
-        private readonly IProduct _repository;
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProduct repository)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
-            this._repository = repository;
+            _productService = productService;
+            _mapper     = mapper;
         }
 
-
-        // GET: api/<ValuesController>
+        // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<ReadProductDto> Get()
+        public ActionResult<ProductDto>Get()
         {
-            var product = _repository.GetProducts().Select(p=> p.productAsDto());
-            return product;
+            var products = _productService.GetProducts();
+            return Ok(products);
         }
 
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public ActionResult<ReadProductDto> Get(int id)
-        {
-            var p = _repository.GetProduct(id).productAsDto();
-            if (p is null)
-            {
-                return NotFound();
-            }
-            return p;
-        }
 
+    //    // GET api/<ProductsController>/5
+    //    [HttpGet("{id}")]
+    //    public ActionResult<ProductDto> Get(Guid id)
+    //    {
+    //        var p = _repository.GetProduct(id);
+    //        if (p is null)
+    //        {
+    //            return NotFound();
+    //        }
+    //        return _mapper.Map<ProductDto>(p);
+    //    }
 
-        // POST api/<ValuesController>
-        [HttpPost]
-        public ActionResult<EditingProductDto> Post(EditingProductDto p)
-        {
-            Product newp = new Product
-            {
-                ProductName    = p.Name,
-                Price          = p.Price,
-                ExpirationDate = p.Expiration,
-                Sku            = p.Sku,                
-            };
-            _repository.CreateProduct(newp);
-            return newp.editingAsDto();
-        }
+    //    // POST api/<ProductsController>
+    //    [HttpPost]
+    //    public ActionResult<ProductDto> Post(ProductDto p)
+    //    {
+    //        var product = _mapper.Map<Product>(p);
+    //        _repository.CreateProduct(product);
+    //        return Ok();
+    //    }
 
+    //    // PUT api/<ProductsController>/5
+    //    [HttpPut("{id}")]
+    //    public ActionResult<ProductDto> Put(ProductDto product, Guid id)
+    //    {
+    //        var result = _repository.GetProduct(id);
+    //        if (result is null) return NotFound();
+    //        var newproduct = _mapper.Map<Product>(product);
+    //        _repository.UpdateProduct(newproduct);
+    //        return Ok();
+    //    }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public ActionResult<ReadProductDto> Delete(int id)
-        {
-            Product p = _repository.GetProduct(id);
-            if (p is null)
-            {
-                return NotFound();
-            }
-            _repository.DeleteProduct(id);
-            return NoContent();
-        }
-
-    }   
+    //    // DELETE api/<ProductsController>/5
+    //    [HttpDelete("{id}")]
+    //    public ActionResult<ProductDto> Delete(Guid id)
+    //    {
+    //        Product p = _repository.GetProduct(id);
+    //        if (p is null)
+    //        {
+    //            return NotFound();
+    //        }
+    //        _repository.DeleteProduct(id);
+    //        return NoContent();
+    //    }
+    }
 }

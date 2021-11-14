@@ -1,6 +1,9 @@
-﻿using ApiProductManagment.Dtos.CategoryDto;
-using ApiProductManagment.Models;
-using ApiProductManagment.Repository;
+﻿using ApiProductManagment.Dtos;
+using ApiProductManagment.Dtos.EditingDtos;
+using ApiProductManagment.ModelsUpdate;
+using ApiProductManagment.Repository.CategoryRepository;
+using ApiProductManagment.Services.InterfaceServices;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,65 +14,65 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Controllers
 {
-    [Route("categories")]
+    [Route("Categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
 
-        private readonly ICategory _repository;
 
-        public CategoriesController(ICategory repository)
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
+
+        public CategoriesController(ICategoryService categoryservice, IMapper mapper)
         {
-            _repository = repository;
+            _categoryService = categoryservice;
+            _mapper = mapper;
         }
+
 
         // GET: api/<CategoriesController>
         [HttpGet]
-        public IEnumerable<ReadCategoryDto> Get()
+        public ActionResult<CategoryDto> Get()
         {
-            var c = _repository.GetCategories().Select(p => p.categoryAsDto());
-            return c;         
+            var categories = _categoryService.GetCategories();
+            return Ok(categories);
         }
 
         // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
-        public ActionResult<ReadCategoryDto> Get(int id)
+        public ActionResult<CategoryDto> GetCategory(Guid id)
         {
-            var c = _repository.GetCategory(id).categoryAsDto();
-            if (c is null) { NotFound(); }
-            return c;
+            return _categoryService.GetCategory(id);
+            //var idcategory = _categoryService.GetCategory(id);
+            //return idcategory;
         }
 
         // POST api/<CategoriesController>
         [HttpPost]
-        public ActionResult<EditingCategoryDto> Post(EditingCategoryDto c)
+        public ActionResult<CategoryDto> Post(EditingCategoryDto c)
         {
-            Category newC = new Category
-            {
-                CategoryName = c.Category,
-                Refrigerated = c.Refrigerated,
-                Perishable = c.Perishable
-            };
-            _repository.CreateCategory(newC);
-            return newC.editingCategoryDto();
+            var category = _categoryService.CreateCategory(c);
+            return Ok(category);
         }
 
         // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<CategoryDto> Put(Guid id, EditingCategoryDto c)
         {
+            var idcategory = GetCategory(id);
+            if (idcategory == null)
+            {
+                throw new Exception("Error editing Category");
+            }
+            var category = _categoryService.UploadCategory(c);
+            return Ok(category);
         }
 
         // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public ActionResult<ReadCategoryDto> Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            Category c = _repository.GetCategory(id);
-            if (c is null)
-            {
-                return NotFound();
-            }
-            _repository.DeleteCategory(id);
+            _categoryService.DeleteCategory(id);
             return NoContent();
         }
     }
