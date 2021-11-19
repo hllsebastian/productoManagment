@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    public partial class Product
+    public  class Product
     {
         public Product()
         {
@@ -21,10 +21,8 @@ namespace ApiProductManagment.ModelsUpdate
         [Column("idProduct")]
         [StringLength(50)]
         public Guid IdProduct { get; set; }
-        [Column("idMark")]
         [StringLength(50)]
         public Guid IdMark { get; set; }
-        [Column("nameProduct")]
         [StringLength(100)]
         public string NameProduct { get; set; }
         [Column("expirationDate")]
@@ -33,8 +31,8 @@ namespace ApiProductManagment.ModelsUpdate
         [StringLength(300)]
         public string BarCode { get; set; }
 
-        [ForeignKey(nameof(IdMark))]
-        [InverseProperty(nameof(Trademark.Products))]
+        //[ForeignKey(nameof(IdMark))]
+        //[InverseProperty(nameof(Trademark.Products))]
         public virtual Trademark IdMarkNavigation { get; set; }
         [InverseProperty(nameof(CategoriesXproduct.IdProductNavigation))]
         public virtual ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }

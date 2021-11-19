@@ -1,7 +1,6 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
-using ApiProductManagment.Repository.ProductRepository;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

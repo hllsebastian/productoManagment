@@ -43,8 +43,6 @@ namespace ApiProductManagment.Extention
             services.AddControllers(option =>
             {
 
-
-
             }).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
