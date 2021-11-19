@@ -9,6 +9,5 @@ namespace ApiProductManagment.Repository.Interfaces
 {
     public interface IProductRepository : IRepositoryBase<Product>
     {
-        Task<IEnumerable<Product>> ConsultData(ProductDto filtro);
     }
 }

@@ -2,7 +2,6 @@ using ApiProductManagment.Extention;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository;
 using ApiProductManagment.Repository.Interfaces;
-using ApiProductManagment.Repository.ProductRepository;
 using ApiProductManagment.Repository.RepositoryBase;
 using ApiProductManagment.Services;
 using ApiProductManagment.Services.InterfaceServices;

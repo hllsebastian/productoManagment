@@ -97,11 +97,11 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
-                entity.Property(e => e.BarCode).IsUnicode(false);
-
                 entity.Property(e => e.IdMark).IsUnicode(false);
 
                 entity.Property(e => e.NameProduct).IsUnicode(false);
+
+                entity.Property(e => e.BarCode).IsUnicode(false);
 
                 entity.HasOne(d => d.IdMarkNavigation)
                     .WithMany(p => p.Products)

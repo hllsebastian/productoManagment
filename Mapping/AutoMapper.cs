@@ -15,6 +15,8 @@ namespace ApiProductManagment.Mapping
         public AutoMapper()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Product, EditingProductDto>().ReverseMap();
+
 
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, EditingCategoryDto>().ReverseMap();
