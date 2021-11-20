@@ -21,12 +21,18 @@ namespace ApiProductManagment.ModelsUpdate
         [Column("idProduct")]
         [StringLength(50)]
         public Guid IdProduct { get; set; }
+
+        [Column("idMark")]
         [StringLength(50)]
         public Guid IdMark { get; set; }
+
+        [Column("nameProduct")]
         [StringLength(100)]
         public string NameProduct { get; set; }
+
         [Column("expirationDate")]
         public DateTime? ExpirationDate { get; set; }
+
         [Column("barCode")]
         [StringLength(300)]
         public string BarCode { get; set; }
