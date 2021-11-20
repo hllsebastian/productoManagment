@@ -93,7 +93,7 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.IdProduct)
-                    .HasName("PK__Products__5EEC79D120FD1CAC");
+                    /*.HasName("PK__Products__5EEC79D120FD1CAC")*/;
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
@@ -106,7 +106,7 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.HasOne(d => d.IdMarkNavigation)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.IdMark)
-                    .HasConstraintName("FK_Mark_Products");
+                    /*.HasConstraintName("FK_Mark_Products")*/;
             });
 
             modelBuilder.Entity<ShoppingList>(entity =>
