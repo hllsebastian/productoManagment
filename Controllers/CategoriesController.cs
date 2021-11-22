@@ -47,7 +47,7 @@ namespace ApiProductManagment.Controllers
         }
 
         // POST api/<CategoriesController>
-        [HttpPost("{post}")]
+        [HttpPost]
         public async Task<IActionResult> Post(EditingCategoryDto category)
         {
             var resultcategory = await _categoryService.CreateCategory(category);
@@ -55,7 +55,7 @@ namespace ApiProductManagment.Controllers
         }
 
         // PUT api/<CategoriesController>/5
-        [HttpPut("{put}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, EditingCategoryDto category)
         {
             var categoryresult = await _categoryService.UploadCategory(id, category);
