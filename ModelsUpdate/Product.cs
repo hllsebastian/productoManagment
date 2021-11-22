@@ -10,12 +10,12 @@ namespace ApiProductManagment.ModelsUpdate
 {
     public  class Product
     {
-        public Product()
-        {
-            CategoriesXproducts = new HashSet<CategoriesXproduct>();
-            CupBoardDetails = new HashSet<CupBoardDetail>();
-            ShoppingLists = new HashSet<ShoppingList>();
-        }
+        //public Product()
+        //{
+        //    CategoriesXproducts = new HashSet<CategoriesXproduct>();
+        //    CupBoardDetails = new HashSet<CupBoardDetail>();
+        //    ShoppingLists = new HashSet<ShoppingList>();
+        //}
 
         [Key]
         [Column("idProduct")]
@@ -39,12 +39,12 @@ namespace ApiProductManagment.ModelsUpdate
 
         //[ForeignKey(nameof(IdMark))]
         //[InverseProperty(nameof(Trademark.Products))]
-        public virtual Trademark IdMarkNavigation { get; set; }
-        [InverseProperty(nameof(CategoriesXproduct.IdProductNavigation))]
-        public virtual ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }
-        [InverseProperty(nameof(CupBoardDetail.IdProductNavigation))]
-        public virtual ICollection<CupBoardDetail> CupBoardDetails { get; set; }
-        [InverseProperty(nameof(ShoppingList.IdProductNavigation))]
-        public virtual ICollection<ShoppingList> ShoppingLists { get; set; }
+        public  Trademark IdMarkNavigation { get; set; }
+        //[InverseProperty(nameof(CategoriesXproduct.IdProductNavigation))]
+        public ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }
+        //[InverseProperty(nameof(CupBoardDetail.IdProductNavigation))]
+        public  ICollection<CupBoardDetail> CupBoardDetails { get; set; }
+        //[InverseProperty(nameof(ShoppingList.IdProductNavigation))]
+        public  ICollection<ShoppingList> ShoppingLists { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace ApiProductManagment.ModelsUpdate
         public virtual DbSet<UserXcupBoard> UserXcupBoards { get; set; }
         public virtual DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
 
-      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
@@ -93,7 +93,7 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.IdProduct)
-                    /*.HasName("PK__Products__5EEC79D120FD1CAC")*/;
+                    .HasName("PK__Products__5EEC79D120FD1CAC");
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
@@ -106,7 +106,8 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.HasOne(d => d.IdMarkNavigation)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.IdMark)
-                    /*.HasConstraintName("FK_Mark_Products")*/;
+                .HasConstraintName("FK_Mark_Products")
+                ;
             });
 
             modelBuilder.Entity<ShoppingList>(entity =>

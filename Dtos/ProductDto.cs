@@ -9,7 +9,7 @@ namespace ApiProductManagment.Dtos
     {
         public Guid IdProduct { get; set; }
 
-        public Guid IdTrademark { get; set; }
+        public Guid IdMark { get; set; }    
 
         public string ProductName { get; set; }
 

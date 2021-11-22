@@ -7,9 +7,9 @@ namespace ApiProductManagment.Dtos.EditingDtos
 {
     public class EditingProductDto
     {
-        public Guid IdTrademark { get; set; }
+        public Guid IdMark { get; set; }
 
-        public string ProductName { get; set; }
+        public string NameProduct { get; set; }
 
         public DateTime? ExpirationDate { get; set; }
 

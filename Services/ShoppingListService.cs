@@ -52,12 +52,12 @@ namespace ApiProductManagment.Services
             var shoppingListDB = _repository.QueryById(s => s.IdShopping == id);
             if (shoppingListDB != null)
             {
-                var upshoppingList = _mapper.Map<ShoppingList>(shoppingListDB);
+                var upshoppingList = _mapper.Map<ShoppingList>(shoppingList);
                 await _repository.Upload(upshoppingList);
                 var response = _mapper.Map<EditingShoppingListDto>(upshoppingList);
                 return response;
             }
-            throw new Exception("Error editing Category");
+            throw new Exception("Error editing ShoppingList");
         }
 
 

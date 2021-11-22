@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    public partial class Trademark
+    public class Trademark
     {
-        public Trademark()
-        {
-            Products = new HashSet<Product>();
-        }
+        //public Trademark()
+        //{
+        //    Products = new HashSet<Product>();
+        //}
 
         [Key]
         [Column("idTrademark")]
@@ -23,7 +23,7 @@ namespace ApiProductManagment.ModelsUpdate
         [StringLength(100)]
         public string Mark { get; set; }
 
-        [InverseProperty(nameof(Product.IdMarkNavigation))]
-        public virtual ICollection<Product> Products { get; set; }
+        //[InverseProperty(nameof(Product.IdMarkNavigation))]
+        public ICollection<Product> Products { get; set; }
     }
 }

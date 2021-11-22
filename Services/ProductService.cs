@@ -53,7 +53,7 @@ namespace ApiProductManagment.Services
             var productDb = _repository.QueryById(p => p.IdProduct == id);
             if (productDb != null)
             {
-                productDb.NameProduct = product.ProductName;
+                productDb.NameProduct = product.NameProduct;
                 // var upCategory = _mapper.Map<Category>(category);
                 await _repository.Upload(productDb);
                 var response = _mapper.Map<EditingProductDto>(productDb);
