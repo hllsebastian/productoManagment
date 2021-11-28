@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Dtos.EditingDtos
 {
-    public class EditingProductDto
+    public class PostProductDto
     {
         public Guid IdMark { get; set; }
 

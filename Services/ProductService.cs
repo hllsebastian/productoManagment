@@ -41,7 +41,7 @@ namespace ApiProductManagment.Services
             throw new Exception("Error reading Product");
         }
 
-        public async Task<ProductDto> CreateProduct(EditingProductDto product)
+        public async Task<ProductDto> CreateProduct(PostProductDto product)
         {
             var productDb = _mapper.Map<Product>(product);
             await _repository.Create(productDb);
@@ -49,7 +49,7 @@ namespace ApiProductManagment.Services
             return response;
         }
 
-        public async Task<EditingProductDto> UploadProduct(Guid id, EditingProductDto product)
+        public async Task<PutProductDto> UploadProduct(Guid id, PutProductDto product)
         {
             var productDb = _repository.QueryById(p => p.IdProduct == id);
             if (productDb != null)
@@ -57,7 +57,7 @@ namespace ApiProductManagment.Services
                 productDb.NameProduct = product.NameProduct;
                 // var upCategory = _mapper.Map<Category>(category);
                 await _repository.Upload(productDb);
-                var response = _mapper.Map<EditingProductDto>(productDb);
+                var response = _mapper.Map<PutProductDto>(productDb);
                 return response;
             }
             else

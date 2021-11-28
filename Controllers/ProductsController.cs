@@ -46,7 +46,7 @@ namespace ApiProductManagment.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
-        public async Task<IActionResult> Post(EditingProductDto product)
+        public async Task<IActionResult> Post(PostProductDto product)
         {
             var resultproduct = await _productService.CreateProduct(product);
             return Ok(resultproduct);
@@ -54,7 +54,7 @@ namespace ApiProductManagment.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, EditingProductDto product)
+        public async Task<IActionResult> Put(Guid id, PutProductDto product)
         {
             var productresult = await _productService.UploadProduct(id, product);
             return Ok(productresult);
