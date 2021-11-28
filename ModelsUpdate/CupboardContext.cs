@@ -70,10 +70,10 @@ namespace ApiProductManagment.ModelsUpdate
 
             modelBuilder.Entity<CupBoardDetail>(entity =>
             {
-                entity.HasKey(e => e.IdCupboardDeatail)
+                entity.HasKey(e => e.IdCupboardDetail)
                     .HasName("PK__CupBoard__45BC4B6ADE04BAA2");
 
-                entity.Property(e => e.IdCupboardDeatail).IsUnicode(false);
+                entity.Property(e => e.IdCupboardDetail).IsUnicode(false);
 
                 entity.Property(e => e.IdCupBoard).IsUnicode(false);
 
@@ -194,7 +194,7 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<CategoriesXproduct>().Property(e => e.IdCategoryXproduct).HasConversion<string>();
             modelBuilder.Entity<Category>().Property(e => e.IdCategory).HasConversion<string>();
             modelBuilder.Entity<CupBoard>().Property(e => e.IdCupBoard).HasConversion<string>();
-            modelBuilder.Entity<CupBoardDetail>().Property(e => e.IdCupboardDeatail).HasConversion<string>();
+            modelBuilder.Entity<CupBoardDetail>().Property(e => e.IdCupboardDetail).HasConversion<string>();
             modelBuilder.Entity<Product>().Property(e => e.IdProduct).HasConversion<string>();
             modelBuilder.Entity<ShoppingList>().Property(e => e.IdShopping).HasConversion<string>();
             modelBuilder.Entity<Trademark>().Property(e => e.IdTrademark).HasConversion<string>();

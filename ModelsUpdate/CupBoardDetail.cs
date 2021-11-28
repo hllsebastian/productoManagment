@@ -12,9 +12,9 @@ namespace ApiProductManagment.ModelsUpdate
     public partial class CupBoardDetail
     {
         [Key]
-        [Column("idCupboardDeatail")]
+        [Column("idCupboardDetail")]
         [StringLength(50)]
-        public Guid IdCupboardDeatail { get; set; }
+        public Guid IdCupboardDetail { get; set; }
         [Column("idCupBoard")]
         [StringLength(50)]
         public Guid IdCupBoard { get; set; }

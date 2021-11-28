@@ -18,7 +18,6 @@ namespace ApiProductManagment.Mapping
             CreateMap<Product, PostProductDto>().ReverseMap();
             CreateMap<Product, PutProductDto>().ReverseMap();
 
-
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, EditingCategoryDto>().ReverseMap();
             
@@ -28,6 +27,7 @@ namespace ApiProductManagment.Mapping
             CreateMap<ShoppingList, ShoppingListDto>().ReverseMap();
             CreateMap<ShoppingList, EditingShoppingListDto>().ReverseMap();
 
+            CreateMap<CupBoardDetail, CupboardDetailPutDto>().ReverseMap();
 
 
         }
