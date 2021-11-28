@@ -103,7 +103,7 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.BarCode).IsUnicode(false);
 
-                entity.HasOne(d => d.IdMarkNavigation)
+                entity.HasOne(d => d.Trademark)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.IdMark)
                 .HasConstraintName("FK_Mark_Products")

@@ -4,6 +4,7 @@ using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace ApiProductManagment.Services
 
         public IEnumerable<ProductDto> GetProducts()
         {
-            var productsDb =  _repository.Queries();
+            var productsDb =  _repository.Queries().Include(x => x.Trademark);
             var productsDto = _mapper.Map<IEnumerable<ProductDto>> (productsDb);
             return productsDto;
         }

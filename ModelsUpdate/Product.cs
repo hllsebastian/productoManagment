@@ -39,7 +39,7 @@ namespace ApiProductManagment.ModelsUpdate
 
         //[ForeignKey(nameof(IdMark))]
         //[InverseProperty(nameof(Trademark.Products))]
-        public  Trademark IdMarkNavigation { get; set; }
+        public  Trademark Trademark { get; set; }
         //[InverseProperty(nameof(CategoriesXproduct.IdProductNavigation))]
         public ICollection<CategoriesXproduct> CategoriesXproducts { get; set; }
         //[InverseProperty(nameof(CupBoardDetail.IdProductNavigation))]

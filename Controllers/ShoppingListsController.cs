@@ -58,7 +58,7 @@ namespace ApiProductManagment.Controllers
         public async Task<IActionResult> Put(Guid id, EditingShoppingListDto shoppingList)
         {
             var shoppingListresult = await _shoppingkService.UploadShoppingList(id, shoppingList);
-            return Ok(shoppingList); ;
+            return Ok(shoppingListresult); ;
         }
 
         // DELETE api/<ShoppingListsController>/5
