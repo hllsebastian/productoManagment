@@ -13,16 +13,16 @@ namespace ApiProductManagment.ModelsUpdate
         {
         }
 
-        public virtual DbSet<CategoriesXproduct> CategoriesXproducts { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CupBoard> CupBoards { get; set; }
-        public virtual DbSet<CupBoardDetail> CupBoardDetails { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ShoppingList> ShoppingLists { get; set; }
-        public virtual DbSet<Trademark> Trademarks { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserXcupBoard> UserXcupBoards { get; set; }
-        public virtual DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
+        public  DbSet<CategoriesXproduct> CategoriesXproducts { get; set; }
+        public  DbSet<Category> Categories { get; set; }
+        public  DbSet<CupBoard> CupBoards { get; set; }
+        public  DbSet<CupBoardDetail> CupBoardDetail { get; set; } 
+        public  DbSet<Product> Products { get; set; }
+        public  DbSet<ShoppingList> ShoppingLists { get; set; }
+        public  DbSet<Trademark> Trademarks { get; set; }
+        public  DbSet<User> Users { get; set; }
+        public  DbSet<UserXcupBoard> UserXcupBoards { get; set; }
+        public  DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,21 +63,31 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.HasKey(e => e.IdCupBoard)
                     .HasName("PK__CupBoard__089DCDC596B81653");
 
-                entity.Property(e => e.IdCupBoard).IsUnicode(false);
+                entity.Property(e => e.IdCupBoard);
 
-                entity.Property(e => e.NameCupBoard).IsUnicode(false);
+                entity.Property(e => e.NameCupBoard);
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<CupBoardDetail>(entity =>
             {
+                entity.ToTable("CupBoardDetail");
+
                 entity.HasKey(e => e.IdCupboardDetail)
                     .HasName("PK__CupBoard__45BC4B6ADE04BAA2");
 
-                entity.Property(e => e.IdCupboardDetail).IsUnicode(false);
+                entity.Property(e => e.IdCupboardDetail).HasColumnName("idCupboardDetail");
 
-                entity.Property(e => e.IdCupBoard).IsUnicode(false);
+                entity.Property(e => e.IdCupBoard).HasColumnName("idCupBoard");
 
-                entity.Property(e => e.IdProduct).IsUnicode(false);
+                entity.Property(e => e.IdProduct).HasColumnName("idProduct");
+
+                entity.Property(e => e.EntryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ExitDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.CupBoard)
                     .WithMany(p => p.CupBoardDetails)
@@ -187,10 +197,6 @@ namespace ApiProductManagment.ModelsUpdate
                     .HasConstraintName("FK_User_UserXShopping");
             });
 
-            OnModelCreatingPartial(modelBuilder);
-
-            OnModelCreatingPartial(modelBuilder);
-
             modelBuilder.Entity<CategoriesXproduct>().Property(e => e.IdCategoryXproduct).HasConversion<string>();
             modelBuilder.Entity<Category>().Property(e => e.IdCategory).HasConversion<string>();
             modelBuilder.Entity<CupBoard>().Property(e => e.IdCupBoard).HasConversion<string>();
@@ -201,8 +207,10 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<User>().Property(e => e.IdUser).HasConversion<string>();
             modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXcupboard).HasConversion<string>();
             modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>();
+
+            base.OnModelCreating(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

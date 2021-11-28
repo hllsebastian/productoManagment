@@ -38,7 +38,7 @@ namespace ApiProductManagment.Services
             }
         }
 
-        public CreateCupBoardDto CreateCupboard(CreateCupBoardDto cupboard)
+        public CreateCupBoardDto CreateCupboards(CreateCupBoardDto cupboard) 
         {
             var result = _repositoryCupBoard.CreateCupBoard(cupboard);
             cupboard = _mapper.Map<CreateCupBoardDto>(result);

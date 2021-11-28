@@ -24,28 +24,17 @@ namespace ApiProductManagment.Repository.RepositoryBase
             var tableCupboard = new CupBoard();
             try
             {
-                //tableCupboard = _mapper.Map<CupBoard>(cupboard);
-
-                tableCupboard.NameCupBoard = cupboard.NameCupBoard;
-                tableCupboard.IsDefault = cupboard.IsDefault;
-                tableCupboard.CreationDate = cupboard.CreationDate;
+                tableCupboard = _mapper.Map<CupBoard>(cupboard);
 
                 CupBoardContext.CupBoards.Add(tableCupboard);
                 CupBoardContext.SaveChanges();
 
-                foreach (var item in cupboard.CupBoardDetails)
+                /*foreach (var item in cupboard.CupBoardDetails) 
                 {
-                    //var detail = _mapper.Map<CupBoardDetail>(item);
-                    var detail = new CupBoardDetail();
-
+                    var detail = _mapper.Map<CupBoardDetail>(item);
                     detail.IdCupBoard = tableCupboard.IdCupBoard;
-                    detail.IdProduct = item.IdProduct;
-                    detail.Amount = item.Amount;
-                    detail.EntryDate = item.EntryDate;
-                    detail.ExitDate = item.ExitDate;
-                    detail.ExpirationDate = item.ExpirationDate;
-                    CupBoardContext.CupBoardDetails.Add(detail);
-                }
+                    CupBoardContext.CupBoardDetail.Add(detail);
+                }*/
                 transaction.Commit();
             }
             catch (Exception ex)

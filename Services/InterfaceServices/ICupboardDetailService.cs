@@ -12,6 +12,6 @@ namespace ApiProductManagment.Services.InterfaceServices
         IEnumerable<CupboardDetailDto> GetCupboardDetails();
         CupboardDetailDto GetCupboardDetail(Guid id);
         Task<CupboardDetailPutDto> UploadCupboardDetail(Guid id, CupboardDetailPutDto cupboardDetailDto);
-        Task<CupboardDetailPutDto> DeleteCupboardDetail(Guid id);
+        Task<CupboardDetailDto> DeleteCupboardDetail(Guid id);
     }
 }

@@ -8,9 +8,8 @@ namespace ApiProductManagment.Dtos
     {
         public string NameCupBoard { get; set; }
         public bool? IsDefault { get; set; }
-        [DataType(DataType.Date)]
         public DateTime? CreationDate { get; set; }
 
-        public List<CreateCupBoardDetailDto> CupBoardDetails { get; set; }     
+        public List<CupboardDetailDto> CupBoardDetails { get; set; }     
     }
 }
