@@ -79,12 +79,12 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
-                entity.HasOne(d => d.IdCupBoardNavigation)
+                entity.HasOne(d => d.CupBoard)
                     .WithMany(p => p.CupBoardDetails)
                     .HasForeignKey(d => d.IdCupBoard)
                     .HasConstraintName("FK_CupBoard_Detail");
 
-                entity.HasOne(d => d.IdProductNavigation)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.CupBoardDetails)
                     .HasForeignKey(d => d.IdProduct)
                     .HasConstraintName("FK_CupBoard_Products");

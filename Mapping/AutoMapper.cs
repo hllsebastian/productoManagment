@@ -14,6 +14,9 @@ namespace ApiProductManagment.Mapping
     {
         public AutoMapper()
         {
+            CreateMap<CupBoard, CupboardDto>().ReverseMap();
+            CreateMap<CreateCupBoardDetailDto, CupBoard>().ReverseMap();
+
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Product, EditingProductDto>().ReverseMap();
 

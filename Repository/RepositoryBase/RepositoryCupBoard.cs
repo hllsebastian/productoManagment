@@ -1,0 +1,59 @@
+﻿using ApiProductManagment.Dtos;
+using ApiProductManagment.ModelsUpdate;
+using ApiProductManagment.Repository.Interfaces;
+using AutoMapper;
+using System;
+
+namespace ApiProductManagment.Repository.RepositoryBase
+{
+    public class RepositoryCupBoard: RepositoryBase<CupBoard>, IRepositoryCupboard
+    {
+        public CupboardContext CupBoardContext { get; set; }
+        private readonly IMapper _mapper;
+
+        public RepositoryCupBoard(CupboardContext context, IMapper mapper) : base(context)
+        {
+            CupBoardContext = context;
+            _mapper = mapper;
+        }
+
+        public CupBoard CreateCupBoard(CreateCupBoardDto cupboard)
+        {
+            using var transaction = CupBoardContext.Database.BeginTransaction();
+
+            var tableCupboard = new CupBoard();
+            try
+            {
+                //tableCupboard = _mapper.Map<CupBoard>(cupboard);
+
+                tableCupboard.NameCupBoard = cupboard.NameCupBoard;
+                tableCupboard.IsDefault = cupboard.IsDefault;
+                tableCupboard.CreationDate = cupboard.CreationDate;
+
+                CupBoardContext.CupBoards.Add(tableCupboard);
+                CupBoardContext.SaveChanges();
+
+                foreach (var item in cupboard.CupBoardDetails)
+                {
+                    //var detail = _mapper.Map<CupBoardDetail>(item);
+                    var detail = new CupBoardDetail();
+
+                    detail.IdCupBoard = tableCupboard.IdCupBoard;
+                    detail.IdProduct = item.IdProduct;
+                    detail.Amount = item.Amount;
+                    detail.EntryDate = item.EntryDate;
+                    detail.ExitDate = item.ExitDate;
+                    detail.ExpirationDate = item.ExpirationDate;
+                    CupBoardContext.CupBoardDetails.Add(detail);
+                }
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new Exception("No se guardaron los cambios", ex);
+            }
+            return tableCupboard;
+        }
+    }
+}
