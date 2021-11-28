@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Controllers
 {
-    [Route("Categories")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

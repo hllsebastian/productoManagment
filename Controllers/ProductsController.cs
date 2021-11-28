@@ -8,12 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ApiProductManagment.Controllers
 {
-    [Route("Products")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -45,7 +46,7 @@ namespace ApiProductManagment.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
-        public async Task<IActionResult> Post(EditingProductDto product)
+        public async Task<IActionResult> Post(PostProductDto product)
         {
             var resultproduct = await _productService.CreateProduct(product);
             return Ok(resultproduct);
@@ -53,7 +54,7 @@ namespace ApiProductManagment.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, EditingProductDto product)
+        public async Task<IActionResult> Put(Guid id, PutProductDto product)
         {
             var productresult = await _productService.UploadProduct(id, product);
             return Ok(productresult);

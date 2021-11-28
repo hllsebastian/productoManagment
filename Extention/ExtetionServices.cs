@@ -31,12 +31,16 @@ namespace ApiProductManagment.Extention
 
             services.AddScoped(typeof(IRepositoryBase<ShoppingList>), typeof(RepositoryBase<ShoppingList>));
             services.AddTransient<IShoppingListRepository, ShoppingListRepository>();
+            
+            services.AddScoped(typeof(IRepositoryBase<CupBoardDetail>), typeof(RepositoryBase<CupBoardDetail>));
+            services.AddTransient<ICupboardDetailRepository, CupboardDetailRepository>();
 
             services.AddTransient<ICupboardService, CupBoardService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ITrademarkService, TrademarkService>();
             services.AddTransient<IShoppingListService, ShoppingListService>();
+            services.AddTransient<ICupboardDetailService, CupboardDetailService>();
 
             return services;
         }
