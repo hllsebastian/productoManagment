@@ -3,10 +3,6 @@ using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiProductManagment.Mapping
 {
@@ -14,6 +10,12 @@ namespace ApiProductManagment.Mapping
     {
         public AutoMapper()
         {
+            CreateMap<CupBoard, CupboardDto>().ReverseMap();
+            CreateMap<CreateCupBoardDto, CupBoard>().ReverseMap();
+
+            CreateMap<CupBoardDetail, CupboardDetailPutDto>().ReverseMap();
+            CreateMap<CupboardDetailDto, CupBoardDetail>().ReverseMap();
+
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Product, PostProductDto>().ReverseMap();
             CreateMap<Product, PutProductDto>().ReverseMap();
@@ -26,10 +28,6 @@ namespace ApiProductManagment.Mapping
 
             CreateMap<ShoppingList, ShoppingListDto>().ReverseMap();
             CreateMap<ShoppingList, EditingShoppingListDto>().ReverseMap();
-
-            CreateMap<CupBoardDetail, CupboardDetailPutDto>().ReverseMap();
-
-
         }
     }
 }

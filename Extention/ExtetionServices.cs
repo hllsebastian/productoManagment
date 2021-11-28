@@ -17,6 +17,8 @@ namespace ApiProductManagment.Extention
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepositoryBase<CupBoard>), typeof(RepositoryBase<CupBoard>));
+            services.AddTransient<IRepositoryCupboard, RepositoryCupBoard>();
 
             services.AddScoped(typeof(IRepositoryBase<Category>), typeof(RepositoryBase<Category>));
             services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -33,6 +35,7 @@ namespace ApiProductManagment.Extention
             services.AddScoped(typeof(IRepositoryBase<CupBoardDetail>), typeof(RepositoryBase<CupBoardDetail>));
             services.AddTransient<ICupboardDetailRepository, CupboardDetailRepository>();
 
+            services.AddTransient<ICupboardService, CupBoardService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ITrademarkService, TrademarkService>();

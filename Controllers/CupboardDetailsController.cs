@@ -48,12 +48,12 @@ namespace ApiProductManagment.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var response = await _cupboardDetailService.DeleteCupboardDetail(id);
             return Ok(response);
-        }
+        }*/
 
     }
 }

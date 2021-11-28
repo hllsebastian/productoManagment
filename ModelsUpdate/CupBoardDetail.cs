@@ -1,40 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    [Table("CupBoardDetail")]
-    public partial class CupBoardDetail
+    public class CupBoardDetail
     {
-        [Key]
-        [Column("idCupboardDetail")]
-        [StringLength(50)]
-        public Guid IdCupboardDetail { get; set; }
-        [Column("idCupBoard")]
-        [StringLength(50)]
-        public Guid IdCupBoard { get; set; }
-        [Column("idProduct")]
-        [StringLength(50)]
-        public Guid IdProduct { get; set; }
-        [Column("amount")]
+        public Guid IdCupboardDetail { get; set; } 
+        public Guid? IdCupBoard { get; set; }
+        public Guid? IdProduct { get; set; }
         public int? Amount { get; set; }
-        [Column("entryDate", TypeName = "datetime")]
         public DateTime? EntryDate { get; set; }
-        [Column("exitDate", TypeName = "datetime")]
         public DateTime? ExitDate { get; set; }
-        [Column("expirationDate", TypeName = "datetime")]
         public DateTime? ExpirationDate { get; set; }
 
-        [ForeignKey(nameof(IdCupBoard))]
-        [InverseProperty(nameof(CupBoard.CupBoardDetails))]
-        public virtual CupBoard IdCupBoardNavigation { get; set; }
-        [ForeignKey(nameof(IdProduct))]
-        [InverseProperty(nameof(Product.CupBoardDetails))]
-        public virtual Product IdProductNavigation { get; set; }
+        public  CupBoard CupBoard { get; set; }
+        public Product Product { get; set; } 
     }
 }

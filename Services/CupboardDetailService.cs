@@ -5,7 +5,6 @@ using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiProductManagment.Services
@@ -31,7 +30,7 @@ namespace ApiProductManagment.Services
 
         public CupboardDetailDto GetCupboardDetail(Guid id)
         {
-            var CupboardDetailDb = _repository.QueryById(x => x.IdCupBoard == id);
+            var CupboardDetailDb = _repository.QueryById(x => x.IdCupboardDetail == id);
             if (CupboardDetailDb != null)
             {
                 return _mapper.Map<CupboardDetailDto>(CupboardDetailDb);
@@ -41,12 +40,12 @@ namespace ApiProductManagment.Services
 
         public async Task<CupboardDetailPutDto> UploadCupboardDetail(Guid id, CupboardDetailPutDto cupboardDetailDto)
         {
-            var CupboardDetailDb = _repository.QueryById(x => x.IdProduct == id);
+            var CupboardDetailDb = _repository.QueryById(x => x.IdCupboardDetail == id);
             if (CupboardDetailDb != null)
             {
-                //CupboardDetailDb.IdProduct = CupboardDetailPutDto.IdProduct;
-                // var upCategory = _mapper.Map<Category>(category);
-                await _repository.Upload(CupboardDetailDb);
+                
+                var updateDetail = _mapper.Map(cupboardDetailDto, CupboardDetailDb);
+                await _repository.Upload(updateDetail);
                 var response = _mapper.Map<CupboardDetailPutDto>(CupboardDetailDb);
                 return response;
             }
@@ -57,13 +56,13 @@ namespace ApiProductManagment.Services
         }
 
 
-        public async Task<CupboardDetailPutDto> DeleteCupboardDetail(Guid id)
+        public async Task<CupboardDetailDto> DeleteCupboardDetail(Guid id)
         {
-            var CupboardDetailDb = _repository.QueryById(x => x.IdProduct == id);
+            var CupboardDetailDb = _repository.QueryById(x => x.IdCupboardDetail == id);
             if (CupboardDetailDb != null)
             {
                 await _repository.Delete(CupboardDetailDb);
-                var response = _mapper.Map<CupboardDetailPutDto>(CupboardDetailDb);
+                var response = _mapper.Map<CupboardDetailDto>(CupboardDetailDb);
                 return response;
             }
             else
