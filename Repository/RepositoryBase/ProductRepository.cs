@@ -12,8 +12,13 @@ namespace ApiProductManagment.Repository.RepositoryBase
 {
     public class ProductRepository : RepositoryBase<Product>, IProductRepository
     {
-        public ProductRepository(CupboardContext context) : base (context)
+        private readonly IMapper _mapper;
+        public CupboardContext CupboardContext { get; set; }
+
+        public ProductRepository(CupboardContext context, IMapper mapper) : base (context)
         {
+            CupboardContext = context;
+            _mapper = mapper;
         }
     }
 }

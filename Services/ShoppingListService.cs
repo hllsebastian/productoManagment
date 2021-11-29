@@ -49,15 +49,20 @@ namespace ApiProductManagment.Services
 
         public async Task<EditingShoppingListDto> UploadShoppingList(Guid id, EditingShoppingListDto shoppingList)
         {
-            var shoppingListDB = _repository.QueryById(s => s.IdShopping == id);
-            if (shoppingListDB != null)
+            var shoppingListDb = _repository.QueryById(s => s.IdShopping == id);
+            if (shoppingListDb != null)
             {
-                var upshoppingList = _mapper.Map<ShoppingList>(shoppingListDB);
-                await _repository.Upload(upshoppingList);
-                var response = _mapper.Map<EditingShoppingListDto>(upshoppingList);
+                // Si la propiedad va nula
+                shoppingListDb.IdProduct = shoppingList.IdProduct;
+                shoppingListDb.Amount = shoppingList.Amount ?? shoppingListDb.Amount;
+                shoppingListDb.Value = shoppingList.Value ?? shoppingListDb.Value;
+                shoppingListDb.ExpirationDate = shoppingList.ExpirationDate ?? shoppingListDb.ExpirationDate;
+                
+                await _repository.Upload(shoppingListDb);
+                var response = _mapper.Map<EditingShoppingListDto>(shoppingListDb);
                 return response;
             }
-            throw new Exception("Error editing Category");
+            throw new Exception("Error editing ShoppingList");
         }
 
 

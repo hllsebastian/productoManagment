@@ -11,8 +11,8 @@ namespace ApiProductManagment.Services.InterfaceServices
     {
         IEnumerable<ProductDto> GetProducts();
         ProductDto GetProduct(Guid id);
-        Task<ProductDto> CreateProduct(EditingProductDto product);
-        Task<EditingProductDto> UploadProduct(Guid id, EditingProductDto product);
+        Task<ProductDto> CreateProduct(PostProductDto product);
+        Task<PutProductDto> UploadProduct(Guid id, PutProductDto product);
         Task<ProductDto> DeleteProduct(Guid id);
     }
 }

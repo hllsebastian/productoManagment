@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,25 +7,25 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    public partial class CupboardContext : DbContext
+    public partial class CupboardContext : IdentityDbContext<Users>
     {
         public CupboardContext(DbContextOptions<CupboardContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<CategoriesXproduct> CategoriesXproducts { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CupBoard> CupBoards { get; set; }
-        public virtual DbSet<CupBoardDetail> CupBoardDetails { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ShoppingList> ShoppingLists { get; set; }
-        public virtual DbSet<Trademark> Trademarks { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserXcupBoard> UserXcupBoards { get; set; }
-        public virtual DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
+        public  DbSet<CategoriesXproduct> CategoriesXproducts { get; set; }
+        public  DbSet<Category> Categories { get; set; }
+        public  DbSet<CupBoard> CupBoards { get; set; }
+        public  DbSet<CupBoardDetail> CupBoardDetail { get; set; } 
+        public  DbSet<Product> Products { get; set; }
+        public  DbSet<ShoppingList> ShoppingLists { get; set; }
+        public  DbSet<Trademark> Trademarks { get; set; }
+        public  DbSet<User> Users { get; set; }
+        public  DbSet<UserXcupBoard> UserXcupBoards { get; set; }
+        public  DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
 
-      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
@@ -63,28 +64,38 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.HasKey(e => e.IdCupBoard)
                     .HasName("PK__CupBoard__089DCDC596B81653");
 
-                entity.Property(e => e.IdCupBoard).IsUnicode(false);
+                entity.Property(e => e.IdCupBoard);
 
-                entity.Property(e => e.NameCupBoard).IsUnicode(false);
+                entity.Property(e => e.NameCupBoard);
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<CupBoardDetail>(entity =>
             {
-                entity.HasKey(e => e.IdCupboardDeatail)
+                entity.ToTable("CupBoardDetail");
+
+                entity.HasKey(e => e.IdCupboardDetail)
                     .HasName("PK__CupBoard__45BC4B6ADE04BAA2");
 
-                entity.Property(e => e.IdCupboardDeatail).IsUnicode(false);
+                entity.Property(e => e.IdCupboardDetail).HasColumnName("idCupboardDetail");
 
-                entity.Property(e => e.IdCupBoard).IsUnicode(false);
+                entity.Property(e => e.IdCupBoard).HasColumnName("idCupBoard");
 
-                entity.Property(e => e.IdProduct).IsUnicode(false);
+                entity.Property(e => e.IdProduct).HasColumnName("idProduct");
 
-                entity.HasOne(d => d.IdCupBoardNavigation)
+                entity.Property(e => e.EntryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ExitDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.CupBoard)
                     .WithMany(p => p.CupBoardDetails)
                     .HasForeignKey(d => d.IdCupBoard)
                     .HasConstraintName("FK_CupBoard_Detail");
 
-                entity.HasOne(d => d.IdProductNavigation)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.CupBoardDetails)
                     .HasForeignKey(d => d.IdProduct)
                     .HasConstraintName("FK_CupBoard_Products");
@@ -93,7 +104,7 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.IdProduct)
-                    /*.HasName("PK__Products__5EEC79D120FD1CAC")*/;
+                    .HasName("PK__Products__5EEC79D120FD1CAC");
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
@@ -103,10 +114,11 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.BarCode).IsUnicode(false);
 
-                entity.HasOne(d => d.IdMarkNavigation)
+                entity.HasOne(d => d.Trademark)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.IdMark)
-                    /*.HasConstraintName("FK_Mark_Products")*/;
+                .HasConstraintName("FK_Mark_Products")
+                ;
             });
 
             modelBuilder.Entity<ShoppingList>(entity =>
@@ -186,22 +198,20 @@ namespace ApiProductManagment.ModelsUpdate
                     .HasConstraintName("FK_User_UserXShopping");
             });
 
-            OnModelCreatingPartial(modelBuilder);
-
-            OnModelCreatingPartial(modelBuilder);
-
             modelBuilder.Entity<CategoriesXproduct>().Property(e => e.IdCategoryXproduct).HasConversion<string>();
             modelBuilder.Entity<Category>().Property(e => e.IdCategory).HasConversion<string>();
             modelBuilder.Entity<CupBoard>().Property(e => e.IdCupBoard).HasConversion<string>();
-            modelBuilder.Entity<CupBoardDetail>().Property(e => e.IdCupboardDeatail).HasConversion<string>();
+            modelBuilder.Entity<CupBoardDetail>().Property(e => e.IdCupboardDetail).HasConversion<string>();
             modelBuilder.Entity<Product>().Property(e => e.IdProduct).HasConversion<string>();
             modelBuilder.Entity<ShoppingList>().Property(e => e.IdShopping).HasConversion<string>();
             modelBuilder.Entity<Trademark>().Property(e => e.IdTrademark).HasConversion<string>();
             modelBuilder.Entity<User>().Property(e => e.IdUser).HasConversion<string>();
             modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXcupboard).HasConversion<string>();
             modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>();
+
+            base.OnModelCreating(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

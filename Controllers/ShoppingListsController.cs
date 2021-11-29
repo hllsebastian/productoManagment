@@ -2,16 +2,16 @@
 using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace ApiProductManagment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShoppingListsController : ControllerBase
@@ -58,7 +58,7 @@ namespace ApiProductManagment.Controllers
         public async Task<IActionResult> Put(Guid id, EditingShoppingListDto shoppingList)
         {
             var shoppingListresult = await _shoppingkService.UploadShoppingList(id, shoppingList);
-            return Ok(shoppingList); ;
+            return Ok(shoppingListresult); ;
         }
 
         // DELETE api/<ShoppingListsController>/5
