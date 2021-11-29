@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ApiProductManagment.ModelsUpdate
 {
-    public partial class CupboardContext : DbContext
+    public partial class CupboardContext : IdentityDbContext<Users>
     {
         public CupboardContext(DbContextOptions<CupboardContext> options)
             : base(options)
