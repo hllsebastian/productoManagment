@@ -39,7 +39,7 @@ namespace ApiProductManagment.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("expired-products")]
         public IActionResult GetExpiredProducts()
         {
             var cupboardDetailsDto = _cupboardDetailService.GetExpiredProducts();
