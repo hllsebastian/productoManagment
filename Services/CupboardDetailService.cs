@@ -48,12 +48,21 @@ namespace ApiProductManagment.Services
         }
 
 
+        public IEnumerable<CupboardDetailDto> GetNextToExpire()
+        {
+            var date = DateTime.Now;
+            var range = date.AddDays(5);
+            var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate < range && x.ExpirationDate >= DateTime.Now);
+            var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
+            return CupboardDetailDto;
+        }
+
+
         public async Task<CupboardDetailPutDto> UploadCupboardDetail(Guid id, CupboardDetailPutDto cupboardDetailDto)
         {
             var CupboardDetailDb = _repository.QueryById(x => x.IdCupboardDetail == id);
             if (CupboardDetailDb != null)
-            {
-                
+            {  
                 var updateDetail = _mapper.Map(cupboardDetailDto, CupboardDetailDb);
                 await _repository.Upload(updateDetail);
                 var response = _mapper.Map<CupboardDetailPutDto>(CupboardDetailDb);

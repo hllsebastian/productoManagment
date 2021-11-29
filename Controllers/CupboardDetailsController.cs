@@ -44,6 +44,13 @@ namespace ApiProductManagment.Controllers
         {
             var cupboardDetailsDto = _cupboardDetailService.GetExpiredProducts();
             return Ok(cupboardDetailsDto);
+        } 
+        
+        [HttpGet("productsNextToExpire")]
+        public IActionResult GetNextToExpire()
+        {
+            var cupboardDetailsDto = _cupboardDetailService.GetNextToExpire();
+            return Ok(cupboardDetailsDto);
         }
 
 
