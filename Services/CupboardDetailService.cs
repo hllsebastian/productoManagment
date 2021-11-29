@@ -5,6 +5,7 @@ using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiProductManagment.Services
@@ -26,7 +27,8 @@ namespace ApiProductManagment.Services
             var CupboardDetailDb = _repository.Queries();
             var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
             return CupboardDetailDto;
-        }
+        } 
+
 
         public CupboardDetailDto GetCupboardDetail(Guid id)
         {
@@ -37,6 +39,14 @@ namespace ApiProductManagment.Services
             }
             throw new Exception("Error reading Cupboard Detail"); ;
         }
+
+        public IEnumerable<CupboardDetailDto> GetExpiredProducts()
+        {
+            var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate > DateTime.Now);
+            var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
+            return CupboardDetailDto;
+        }
+
 
         public async Task<CupboardDetailPutDto> UploadCupboardDetail(Guid id, CupboardDetailPutDto cupboardDetailDto)
         {

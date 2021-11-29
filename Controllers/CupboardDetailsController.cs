@@ -39,6 +39,14 @@ namespace ApiProductManagment.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult GetExpiredProducts()
+        {
+            var cupboardDetailsDto = _cupboardDetailService.GetExpiredProducts();
+            return Ok(cupboardDetailsDto);
+        }
+
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, CupboardDetailPutDto cupboardDetailDto)
         {
