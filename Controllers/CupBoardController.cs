@@ -1,11 +1,13 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Services.InterfaceServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace ApiProductManagment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CupBoardController : ControllerBase

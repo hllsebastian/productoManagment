@@ -3,6 +3,7 @@ using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace ApiProductManagment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
